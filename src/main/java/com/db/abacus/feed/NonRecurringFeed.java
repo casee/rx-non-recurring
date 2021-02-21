@@ -2,6 +2,7 @@ package com.db.abacus.feed;
 
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Flowable;
+import io.reactivex.rxjava3.core.Scheduler;
 import io.reactivex.rxjava3.functions.Predicate;
 import io.reactivex.rxjava3.functions.Supplier;
 
@@ -17,8 +18,8 @@ public class NonRecurringFeed <T> {
     private final Flowable<T> flowable;
 
     public NonRecurringFeed(Supplier<T> supplier, Comparator<T> comparator,
-                            long initialDelay, long period, @NonNull TimeUnit unit) {
-        this.flowable = Flowable.interval(initialDelay, period, unit)
+                            long initialDelay, long period, @NonNull TimeUnit unit, @NonNull Scheduler scheduler) {
+        this.flowable = Flowable.interval(initialDelay, period, unit, scheduler)
                 .takeUntil((Predicate<? super Long>)  a -> stopped.get())
                 .map(a -> supplier.get())
                 .filter(a -> prev.get() == null || comparator.compare(a, prev.get()) != 0)
