@@ -23,8 +23,8 @@ public class NonRecurringFeedProviderTest {
         ScheduledFeedProvider<Integer, Integer> feedProvider = feedProvider(sequence.iterator(), scheduler);
 
         feedProvider.feed(1).subscribe(subscriber);
-
         scheduler.advanceTimeBy(12, TimeUnit.SECONDS);
+
         subscriber.assertNoErrors();
         subscriber.assertValues(11, 12, 13, 14, 15, 14, 17);
     }
