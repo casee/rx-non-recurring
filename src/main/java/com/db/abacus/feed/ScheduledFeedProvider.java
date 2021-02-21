@@ -9,6 +9,6 @@ public interface ScheduledFeedProvider<T, R> {
 
     Flowable<R> feed(T key);
     Flowable<R> feed(T key, long initialDelay, long period, @NonNull TimeUnit unit);
-    void cancelFeed(T key);
+    void disposeFeed(T key);
 
 }

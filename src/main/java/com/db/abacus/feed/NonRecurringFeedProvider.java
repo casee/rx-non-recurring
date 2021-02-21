@@ -2,12 +2,12 @@ package com.db.abacus.feed;
 
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Flowable;
+import io.reactivex.rxjava3.functions.Function;
 
 import java.util.Comparator;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.concurrent.TimeUnit;
-import java.util.function.Function;
 
 public class NonRecurringFeedProvider <T, R> implements ScheduledFeedProvider<T, R> {
 
@@ -45,7 +45,7 @@ public class NonRecurringFeedProvider <T, R> implements ScheduledFeedProvider<T,
     }
 
     @Override
-    public void cancelFeed(T key) {
+    public void disposeFeed(T key) {
         NonRecurringFeed<R> nonRecurringFeed = feedMap.get(key);
         if (nonRecurringFeed != null) {
             nonRecurringFeed.stop();

@@ -50,7 +50,7 @@ public class HelloWorld {
 
         Thread.sleep(2000); // <--- wait for the flow to finish
 
-        feedProvider.cancelFeed("Roma");
+        feedProvider.disposeFeed("Roma");
 
         Disposable subscribeJuly2 = feedProvider.feed("July")
                 .subscribe(a -> onNext(4, a), onError, onCompete);
@@ -58,7 +58,7 @@ public class HelloWorld {
 
         Thread.sleep(5000); // <--- wait for the flow to finish
 
-        feedProvider.cancelFeed("July");
+        feedProvider.disposeFeed("July");
         System.out.println(feedProvider);
 
         Thread.sleep(2001); // <--- wait for the flow to finish
